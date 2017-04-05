@@ -2,14 +2,14 @@
 
 {% load widget_tweaks %}
 
-{% block title %}Registration{% endblock %}
+{% block title %}Edit Register{% endblock %}
 
 {% block body %}
 
 <div class="container" align="center" style="width: 500px;">
 	<h2>Register</h2>
 	
-	{% for field in register_form %}
+	{% for field in form_edit_register %}
 		<form method="post" enctype="multipart/form-data">
 			{% csrf_token %}
 					<label for="field.id_for_label">{{field.label}}</label>

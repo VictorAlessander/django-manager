@@ -5,3 +5,4 @@ Pillow
 whitenoise
 django-widget-tweaks
 psycopg2
+django-localflavor

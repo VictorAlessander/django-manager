@@ -1,13 +1,40 @@
 {% extends 'base.html' %}
 
-{% load widget_tweaks %}
-
-{% block title %}Listagem{% endblock %}
+{% block title %}List of Registers{% endblock %}
 
 {% block body %}
 
 <div class="container">
+	<h1 align="center">Registers</h1>
+	{% for user in registers %}
+		<table>
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Address</th>
+					<th>Phone</th>
+					<th>Sex</th>
+					<th>Email</th>
+					<th>Birthday</th>
+					<th>CPF</th>
+				</tr>
+			</thead>
 
+			<tbody>
+				<tr>
+					<td>{{user.name}}</td>
+					<td>{{user.address}}</td>
+					<td>{{user.phone}}</td>
+					<td>{{user.sex}}</td>
+					<td>{{user.email}}</td>
+					<td>{{user.birthday}}</td>
+					<td>{{user.cpf}}</td>
+					<td><a class="button" href="{% url 'people:edit_register' id=user.id %}">Change</a></td>
+					<td><a class="button" href="#">Remove</a></td>
+				</tr>
+			</tbody>
+		</table>
+	{% endfor %}
 </div>
 
 {% endblock %}
