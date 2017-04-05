@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Index{% endblock %}
+
+{% block body %}
+
+<div class="container" align="center">
+	<h1>Menu</h1>
+
+	<a class="button" href="{% url 'people:register' %}">Register</a>
+	<a class="button" href="{% url 'people:list' %}">Search</a>
+</div>
+
+{% endblock %}
