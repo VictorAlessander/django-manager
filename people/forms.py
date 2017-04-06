@@ -1,9 +1,11 @@
 from django import forms
 from .models import MPeople
-from localflavor.br.forms import BRCPFField, BRPhoneNumberField
+from django_localflavor_br.forms import BRCPFField, BRPhoneNumberField
 
 
 class RegisterForm(forms.ModelForm):
+
+	cpf = BRCPFField()
 
 	class Meta:
 		model = MPeople
@@ -16,7 +18,7 @@ class RegisterForm(forms.ModelForm):
 		}
 
 		phone = BRPhoneNumberField()
-		cpf = BRCPFField()
+		
 		birthday = forms.DateField(widget=forms.DateInput(format='%d/%m/%Y'))
 
 		fields = ('name', 'address', 'phone', 'gender', 'email', 'birthday', 'cpf')
