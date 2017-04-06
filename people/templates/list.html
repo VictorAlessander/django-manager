@@ -6,14 +6,19 @@
 
 <div class="container">
 	<h1 align="center">Registers</h1>
+	{% if not registers %}
+		<h2 align="center">No record was found</h2>
+	
+	{% else %}
 	{% for user in registers %}
+
 		<table>
 			<thead>
 				<tr>
 					<th>Name</th>
 					<th>Address</th>
 					<th>Phone</th>
-					<th>Sex</th>
+					<th>Gender</th>
 					<th>Email</th>
 					<th>Birthday</th>
 					<th>CPF</th>
@@ -25,16 +30,20 @@
 					<td>{{user.name}}</td>
 					<td>{{user.address}}</td>
 					<td>{{user.phone}}</td>
-					<td>{{user.sex}}</td>
+					<td>{{user.gender}}</td>
 					<td>{{user.email}}</td>
 					<td>{{user.birthday}}</td>
 					<td>{{user.cpf}}</td>
 					<td><a class="button" href="{% url 'people:edit_register' id=user.id %}">Change</a></td>
-					<td><a class="button" href="#">Remove</a></td>
+					<td><a class="button" href="{% url 'people:remove_register' id=user.id %}">Remove</a></td>
 				</tr>
 			</tbody>
 		</table>
 	{% endfor %}
+	{% endif %}
+	<div class="return" align="center">
+		<a class="button button-outline" href="/">Return</a>
+	</div>
 </div>
 
 {% endblock %}

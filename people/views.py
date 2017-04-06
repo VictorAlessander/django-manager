@@ -7,9 +7,9 @@ from django.shortcuts import get_object_or_404
 
 class People(object):
 
-	global database
+	#global database
 
-	database = MPeople.objects.all()
+	#database = MPeople.objects.all()
 
 	def index(request):
 		return render(request, 'index.html')
@@ -20,7 +20,8 @@ class People(object):
 			form = RegisterForm(request.POST)
 
 			if form.is_valid():
-				form.save()
+				user = form.save()
+				user.save()
 				return redirect('/')
 
 		else:
@@ -30,12 +31,13 @@ class People(object):
 
 
 	def list_registers(request):
-		registers = database
+		registers = MPeople.objects.all()
 
 		return render(request, 'list.html', {'registers': registers})
 
+
 	def edit_register(request, id):
-		user_id = database.filter(id=id)
+		user_id = MPeople.objects.filter(id=id)
 
 		form_user = get_object_or_404(MPeople, id=user_id)
 		
@@ -43,10 +45,18 @@ class People(object):
 			form = RegisterForm(request.POST, instance=form_user)
 
 			if form.is_valid():
-				form.save()
+				user = form.save()
+				user.save()
 				return redirect('/', id=user_id)
 
 		else:
 			form_user = RegisterForm(instance=form_user)
 
 		return render(request, 'edit_register.html', {'form_edit_register': form_user})
+
+
+	def remove_register(request, id):
+		user_id = get_object_or_404(MPeople, id=id)
+		user_id.delete()
+
+		return redirect('/')
