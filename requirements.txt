@@ -1,7 +1,6 @@
 dj-database-url
 Django
 gunicorn
-Pillow
 whitenoise
 django-widget-tweaks
 psycopg2
