@@ -12,7 +12,6 @@ class RegisterForm(forms.ModelForm):
 		model = MPeople
 
 		widgets = {
-			'phone': forms.TextInput(attrs={'placeholder': 'Just numbers'}),
 			'gender': forms.TextInput(attrs={'placeholder': 'M for Male and F for Female'}),
 			'birthday': forms.DateInput(attrs={'placeholder': 'DD/MM/YYYY', 'format': '%d/%m/%Y'}),
 		}
@@ -20,3 +19,17 @@ class RegisterForm(forms.ModelForm):
 		birthday = forms.DateField()
 
 		fields = ('name', 'address', 'phone', 'gender', 'email', 'birthday', 'cpf')
+
+
+class SearchForm(forms.ModelForm):
+
+	phone = BRPhoneNumberField(required=False, widget=forms.TextInput(attrs={'placeholder': 'Only numbers'}))
+	name = forms.CharField(required=False)
+
+
+	class Meta:
+		model = MPeople
+
+
+
+		fields = ('name', 'phone')
