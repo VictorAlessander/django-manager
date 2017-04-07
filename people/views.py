@@ -47,12 +47,12 @@ class People(object):
 			if form.is_valid():
 				user = form.save()
 				user.save()
-				return redirect('/', id=user_id)
+				return redirect('/')
 
 		else:
-			form_user = RegisterForm(instance=form_user)
+			form = RegisterForm(instance=form_user)
 
-		return render(request, 'edit_register.html', {'form_edit_register': form_user})
+		return render(request, 'edit_register.html', {'form_edit_register': form})
 
 
 	def remove_register(request, id):
