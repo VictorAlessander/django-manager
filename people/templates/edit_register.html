@@ -6,8 +6,8 @@
 
 {% block body %}
 
-<div class="container" align="center" style="width: 500px;">
-	<h2>Register</h2>
+<div class="container" style="width: 500px;">
+	<h2 align="center">Register</h2>
 	
 	{% for field in form_edit_register %}
 		<form method="post" enctype="multipart/form-data">
@@ -19,11 +19,14 @@
 					<span class="help-block">{{error}}</span>
 				{% endfor %}
 	{% endfor %}
-		<button type="submit" class="button">Send</button>
+		<div class="submit" align="center">
+			<button type="submit" class="button">Send</button>
+		</div>
 	</form>
 
-	<a class="button button-outline" href="{% url 'people:list_registers' %}">Return</a>
-
+	<div class="return" align="center">
+		<a class="button button-outline" href="{% url 'people:list_registers' %}">Return</a>
+	</div>
 </div>
 
 {% endblock %}
