@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% load widget_tweaks %}
+
+{% block title %}Search{% endblock %}
+
+{% block body %}
+
+<div class="container">
+
+	<h2 align="center">Search</h2>
+	
+	{% for field in form %}
+		<form method="get" enctype="multipart/form-data">
+			{% csrf_token %}
+					<label for="field.id_for_label">{{field.label}}</label>
+						{{field|add_class:'form-control'}}
+				
+				{% for error in field.errors %}
+					<span class="help-block">{{error}}</span>
+				{% endfor %}
+	{% endfor %}
+
+		<div class="submit" align="center">
+			<button type="submit" class="button">Send</button>	
+		</div>
+
+	</form>
+
+	{% if search %}
+		{% for result in search %}
+			{{result.name}}
+			{{result.address}}
+			{{result.phone}}
+		{% endfor %}
+
+	{% else %}
+		<h3>Not Found</h3>
+
+	{% endif %}
+
+	<div class="return" align="center">
+		<a class="button button-outline" href="{% url 'people:index' %}">Return</a>
+	</div>
+</div>
+
+{% endblock %}
