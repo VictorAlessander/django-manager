@@ -12,13 +12,14 @@ class RegisterForm(forms.ModelForm):
 		model = MPeople
 
 		widgets = {
+			'cep': forms.TextInput(attrs={'placeholder': 'XXXXX-XXX or only numbers'}),
 			'gender': forms.TextInput(attrs={'placeholder': 'M for Male and F for Female'}),
 			'birthday': forms.DateInput(attrs={'placeholder': 'DD/MM/YYYY', 'format': '%d/%m/%Y'}),
 		}
 		
 		birthday = forms.DateField()
 
-		fields = ('name', 'address', 'phone', 'gender', 'email', 'birthday', 'cpf')
+		fields = ('name', 'address', 'city', 'state', 'country', 'cep', 'phone', 'gender', 'email', 'birthday', 'cpf')
 
 
 class SearchForm(forms.ModelForm):
