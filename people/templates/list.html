@@ -13,7 +13,6 @@
 		<h2 align="center">No record was found</h2>
 
 	{% else %}
-		{% for user in registers %}
 
 		<table>
 			<thead>
@@ -27,7 +26,7 @@
 					<th>CPF</th>
 				</tr>
 			</thead>
-
+			{% for user in registers %}
 			<tbody>
 				<tr>
 					<td>{{user.name}}</td>
@@ -41,8 +40,10 @@
 					<td><a class="button" href="{% url 'people:remove_register' id=user.id %}">Remove</a></td>
 				</tr>
 			</tbody>
+			{% endfor %}
+
 		</table>
-		{% endfor %}
+		
 	{% endif %}
 	<div class="return" align="center">
 		<a class="button button-outline" href="/">Return</a>

@@ -28,14 +28,29 @@
 	</form>
 
 	{% if search %}
+		<table>
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Address</th>
+					<th>Phone</th>
+				</tr>
+			</thead>
+		
 		{% for result in search %}
-			{{result.name}}
-			{{result.address}}
-			{{result.phone}}
+			<tbody>
+				<tr>
+					<td>{{result.name}}</td>
+					<td>{{result.address}}</td>
+					<td>{{result.phone}}</td>
+				</tr>
+			</tbody>
+
 		{% endfor %}
 
+		</table>
 	{% else %}
-		<h3>Not Found</h3>
+		<h3 align="center">Not Found</h3>
 
 	{% endif %}
 
