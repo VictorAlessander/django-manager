@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import RegisterForm
+from .forms import RegisterForm, SearchForm
 from .models import MPeople
 from django.shortcuts import get_object_or_404
 
@@ -60,3 +60,32 @@ class People(object):
 		user_id.delete()
 
 		return redirect('/')
+
+	def search_register(request):
+
+		search = None
+
+		if request.method == 'GET':
+			form_search = SearchForm(request.GET)
+
+			if form_search.is_valid():
+
+				field_content = {
+					'name': form_search.cleaned_data.get('name'),
+					'phone': form_search.cleaned_data.get('phone'),
+					}
+
+				if field_content['name'] != "" and field_content['phone'] != "":
+					search = MPeople.objects.filter(name=field_content['name'], phone=field_content['phone'])
+
+				elif field_content['name'] != "":
+					search = MPeople.objects.filter(name=field_content['name'])
+
+				elif field_content['phone'] != "":
+					search = MPeople.objects.filter(phone=field_content['phone'])
+
+
+		else:
+			form_search = SearchForm()
+
+		return render(request, 'search_register.html', {'form': form_search, 'search': search})
