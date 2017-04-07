@@ -6,11 +6,14 @@
 
 <div class="container">
 	<h1 align="center">Registers</h1>
+
+
+
 	{% if not registers %}
 		<h2 align="center">No record was found</h2>
-	
+
 	{% else %}
-	{% for user in registers %}
+		{% for user in registers %}
 
 		<table>
 			<thead>
@@ -39,7 +42,7 @@
 				</tr>
 			</tbody>
 		</table>
-	{% endfor %}
+		{% endfor %}
 	{% endif %}
 	<div class="return" align="center">
 		<a class="button button-outline" href="/">Return</a>
