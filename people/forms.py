@@ -5,7 +5,8 @@ from django_localflavor_br.forms import BRCPFField, BRPhoneNumberField
 
 class RegisterForm(forms.ModelForm):
 
-	cpf = BRCPFField()
+	cpf = BRCPFField(widget=forms.TextInput(attrs={'placeholder': 'Only numbers'}))
+	phone = BRPhoneNumberField(widget=forms.TextInput(attrs={'placeholder': 'Only numbers'}))	
 
 	class Meta:
 		model = MPeople
@@ -13,12 +14,9 @@ class RegisterForm(forms.ModelForm):
 		widgets = {
 			'phone': forms.TextInput(attrs={'placeholder': 'Just numbers'}),
 			'gender': forms.TextInput(attrs={'placeholder': 'M for Male and F for Female'}),
-			'birthday': forms.TextInput(attrs={'placeholder': 'DD/MM/YYYY'}),
-			'cpf': forms.TextInput(attrs={'placeholder': 'XXX.XXX.XXX-XX or 11 digits'})
+			'birthday': forms.DateInput(attrs={'placeholder': 'DD/MM/YYYY', 'format': '%d/%m/%Y'}),
 		}
-
-		phone = BRPhoneNumberField()
 		
-		birthday = forms.DateField(widget=forms.DateInput(format='%d/%m/%Y'))
+		birthday = forms.DateField()
 
 		fields = ('name', 'address', 'phone', 'gender', 'email', 'birthday', 'cpf')
