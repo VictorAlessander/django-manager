@@ -4,7 +4,7 @@ from django.db import models
 
 class MPeople(models.Model):
 
-	name = models.CharField(max_length=100)
+	name = models.CharField(max_length=100, blank=True)
 	address = models.CharField(max_length=255)
 	phone = models.CharField(max_length=13, blank=True)
 	gender = models.CharField(max_length=1)
