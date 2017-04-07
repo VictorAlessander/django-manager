@@ -20,9 +20,13 @@
 				{% endfor %}
 	{% endfor %}
 
-		<button type="submit" class="button">Send</button>
+		<div class="submit">
+			<button type="submit" class="button">Send</button>	
+		</div>
+
 	</form>
-		<a class="button button-outline" href="{% url 'people:index' %}">Return</a>
+
+	<a class="button button-outline" href="{% url 'people:index' %}">Return</a>
 
 </div>
 
