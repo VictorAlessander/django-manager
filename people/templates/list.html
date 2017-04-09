@@ -4,16 +4,16 @@
 
 {% block body %}
 
-<style type="text/css">
-	.informations{
-		margin-left: -12%;
-	}
-</style>
-
 <div class="container">
 	<h1 align="center">Registers</h1>
 
-	{{form_filter.as_p}}
+	<form method="post" enctype="multipart/form-data" style="width: 500px;>
+		{% csrf_token %}
+		{{form_filter.as_p}}	
+
+		<button type="submit" class="button">Send</button>
+	</form>
+	
 
 
 	{% if not registers %}
