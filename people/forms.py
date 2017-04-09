@@ -32,3 +32,14 @@ class SearchForm(forms.ModelForm):
 		model = MPeople
 
 		fields = ('name', 'phone')
+
+
+class FilterForm(forms.ModelForm):
+	'''Filtrate with optional parameters: age, gender or city'''
+
+	age = forms.ModelChoiceField(widget=forms.Select(), queryset=MPeople.objects.values('birthday'))
+
+	class Meta:
+		model = MPeople
+
+		fields = ('age',)

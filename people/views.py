@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import RegisterForm, SearchForm
+from .forms import RegisterForm, SearchForm,FilterForm
 from .models import MPeople
 from django.shortcuts import get_object_or_404
 
@@ -33,7 +33,16 @@ class People(object):
 	def list_registers(request):
 		registers = MPeople.objects.all()
 
-		return render(request, 'list.html', {'registers': registers})
+		if request.method == 'POST':
+			form = FilterForm(request.POST or None)
+
+			if form.is_valid():
+				choice = request.POST.get('birthday', '')
+
+		else:
+			form = FilterForm()
+
+		return render(request, 'list.html', {'registers': registers, 'form_filter': form})
 
 
 	def edit_register(request, id):
