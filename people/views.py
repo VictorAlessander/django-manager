@@ -2,14 +2,11 @@ from django.shortcuts import render, redirect
 from .forms import RegisterForm, SearchForm,FilterForm
 from .models import MPeople
 from django.shortcuts import get_object_or_404
+import re
 
 # Create your views here.
 
 class People(object):
-
-	#global database
-
-	#database = MPeople.objects.all()
 
 	def index(request):
 		return render(request, 'index.html')
@@ -33,25 +30,28 @@ class People(object):
 	def list_registers(request):
 		registers = MPeople.objects.all()
 		
-		if request.method == 'GET':
-			form = FilterForm(request.GET or None)
+		if request.method == 'POST':
+			form = FilterForm(request.POST or None)
 
 			if form.is_valid():
 
 				context = {
-				'birthday': form.cleaned_data.get('birthday'),
-				'gender': form.cleaned_data.get('gender'),
-				'city': form.cleaned_data.get('city'),
+					'age': request.POST['age'],
+					'gender': request.POST['gender'],
+					'city': request.POST['city'],
 				}
 
-				if context['birthday'] != "":
-					registers = MPeople.objects.filter(birthday=context['birthday'])
+				if context['age']:
+					age_choosed = re.sub("[''{ birthday: datetime.date()}]", '', context['age'])
+					age_choosed = re.sub('[,]', '-', age_choosed)
 
-				elif context['gender'] != "":
-					registers = MPeople.objects.filter(gender=context['gender'])
+					registers = MPeople.objects.filter(birthday=age_choosed)
 
-				elif context['city'] != "":
-					registers = MPeople.objects.filter(city=context['city'])					
+				elif context['city']:
+					registers = MPeople.objects.filter(city=form.cleaned_data.get('city'))
+
+				elif request.POST['gender']:
+					registers = MPeople.objects.filter(gender=form.cleaned_data.get('gender'))
 
 		else:
 			form = FilterForm()

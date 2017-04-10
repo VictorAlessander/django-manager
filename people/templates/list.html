@@ -7,7 +7,7 @@
 <div class="container">
 	<h1 align="center">Registers</h1>
 
-	<form method="get" enctype="multipart/form-data">
+	<form method="post" action="." enctype="multipart/form-data">
 		{% csrf_token %}
 
 		{{form_filter.as_p}}
@@ -16,7 +16,7 @@
 		
 	</form>
 	
-	{% if not form_filter %}
+	{% if form_filter %}
 		<table class="informations">
 			<thead>
 				<tr>

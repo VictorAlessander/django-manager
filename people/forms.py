@@ -37,9 +37,20 @@ class SearchForm(forms.ModelForm):
 class FilterForm(forms.ModelForm):
 	'''Filtrate with optional parameters: age, gender or city'''
 
-	age = forms.ModelChoiceField(widget=forms.Select(), queryset=MPeople.objects.values_list('birthday', flat=True).distinct(), required=False, empty_label='')
-	gender = forms.ModelChoiceField(widget=forms.Select(), queryset=MPeople.objects.values_list('gender', flat=True).distinct(), required=False, empty_label='')
-	city = forms.ModelChoiceField(widget=forms.Select(), queryset=MPeople.objects.values_list('city', flat=True).distinct(), required=False, empty_label='')
+	database = MPeople.objects.all()
+
+	age_choices = database.values('birthday').distinct()
+	iage_choices = [('', 'None')] + [(id, id) for id in age_choices]
+
+	age = forms.ChoiceField(choices=iage_choices, widget=forms.Select(), required=False, localize=True)
+
+	gender_choices = database.values_list('gender', flat=True).distinct()
+	igender_choices = [('', 'None')] + [(id, id) for id in gender_choices]
+	gender = forms.ChoiceField(choices=igender_choices, widget=forms.Select(), required=False)
+
+	city_choices = database.values_list('city', flat=True).distinct()
+	icity_choices = [('', 'None')] + [(id, id) for id in city_choices]
+	city = forms.ChoiceField(choices=icity_choices, widget=forms.Select(), required=False)
 
 	class Meta:
 		model = MPeople
