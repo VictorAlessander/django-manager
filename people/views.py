@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import RegisterForm, SearchForm,FilterForm
+from .forms import RegisterForm, SearchForm, FilterForm
 from .models import MPeople
 from django.shortcuts import get_object_or_404
 import re
