@@ -7,20 +7,16 @@
 <div class="container">
 	<h1 align="center">Registers</h1>
 
-	<form method="post" enctype="multipart/form-data" style="width: 500px;>
+	<form method="get" enctype="multipart/form-data">
 		{% csrf_token %}
-		{{form_filter.as_p}}	
 
-		<button type="submit" class="button">Send</button>
+		{{form_filter.as_p}}
+
+		<button type="submit" class="button">Filter</button>
+		
 	</form>
 	
-
-
-	{% if not registers %}
-		<h2 align="center">No record was found</h2>
-
-	{% else %}
-
+	{% if not form_filter %}
 		<table class="informations">
 			<thead>
 				<tr>
@@ -38,6 +34,46 @@
 				</tr>
 			</thead>
 			{% for user in registers %}
+			<tbody>
+				<tr>
+					<td>{{user.name}}</td>
+					<td>{{user.address}}</td>
+					<td>{{user.city}}</td>
+					<td>{{user.state}}</td>
+					<td>{{user.country}}</td>
+					<td>{{user.cep}}</td>
+					<td>{{user.phone}}</td>
+					<td>{{user.gender}}</td>
+					<td>{{user.email}}</td>
+					<td>{{user.birthday}}</td>
+					<td>{{user.cpf}}</td>
+					<td><a class="button" href="{% url 'people:edit_register' id=user.id %}">Change</a></td>
+					<td><a class="button" href="{% url 'people:remove_register' id=user.id %}">Remove</a></td>
+				</tr>
+			</tbody>
+			{% endfor %}
+
+		</table>
+
+	{% else %}
+
+		<table class="filtrated_informations">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Address</th>
+					<th>City</th>
+					<th>State</th>
+					<th>Country</th>
+					<th>CEP</th>
+					<th>Phone</th>
+					<th>Gender</th>
+					<th>Email</th>
+					<th>Birthday</th>
+					<th>CPF</th>
+				</tr>
+			</thead>
+			{% for user in filtred_registers %}
 			<tbody>
 				<tr>
 					<td>{{user.name}}</td>

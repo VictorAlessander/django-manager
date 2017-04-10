@@ -32,12 +32,26 @@ class People(object):
 
 	def list_registers(request):
 		registers = MPeople.objects.all()
-
-		if request.method == 'POST':
-			form = FilterForm(request.POST or None)
+		
+		if request.method == 'GET':
+			form = FilterForm(request.GET or None)
 
 			if form.is_valid():
-				choice = request.POST.get('birthday', '')
+
+				context = {
+				'birthday': form.cleaned_data.get('birthday'),
+				'gender': form.cleaned_data.get('gender'),
+				'city': form.cleaned_data.get('city'),
+				}
+
+				if context['birthday'] != "":
+					registers = MPeople.objects.filter(birthday=context['birthday'])
+
+				elif context['gender'] != "":
+					registers = MPeople.objects.filter(gender=context['gender'])
+
+				elif context['city'] != "":
+					registers = MPeople.objects.filter(city=context['city'])					
 
 		else:
 			form = FilterForm()
