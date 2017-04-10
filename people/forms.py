@@ -41,7 +41,6 @@ class FilterForm(forms.ModelForm):
 
 	age_choices = database.values('birthday').distinct()
 	iage_choices = [('', 'None')] + [(id, id) for id in age_choices]
-
 	age = forms.ChoiceField(choices=iage_choices, widget=forms.Select(), required=False, localize=True)
 
 	gender_choices = database.values_list('gender', flat=True).distinct()
