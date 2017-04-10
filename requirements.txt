@@ -1,7 +1,3 @@
-dj-database-url
 Django
-gunicorn
-whitenoise
 django-widget-tweaks
-psycopg2
 django-localflavor-br
