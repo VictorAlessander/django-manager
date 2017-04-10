@@ -7,3 +7,5 @@ Lines: 43, 47, 51 and change set parameters in 'choice' as '' on lines 44, 48 an
 # The reason
 
 Django will try to find the table mpeople, but was not already created.
+
+After you do this and run the commands to create the database, you can undo the changes to back the original state.
