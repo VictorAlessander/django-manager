@@ -19,7 +19,7 @@ class People(object):
 			if form.is_valid():
 				user = form.save()
 				user.save()
-				return redirect('/')
+				return redirect('/register/')
 
 		else:
 			form = RegisterForm()
@@ -70,7 +70,7 @@ class People(object):
 			if form.is_valid():
 				user = form.save()
 				user.save()
-				return redirect('/')
+				return redirect('/list_registers/')
 
 		else:
 			form = RegisterForm(instance=form_user)
@@ -82,7 +82,7 @@ class People(object):
 		user_id = get_object_or_404(MPeople, id=id)
 		user_id.delete()
 
-		return redirect('/')
+		return redirect('/list_registers/')
 
 	def search_register(request):
 
