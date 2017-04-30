@@ -37,21 +37,24 @@ class SearchForm(forms.ModelForm):
 class FilterForm(forms.ModelForm):
 	'''Filtrate with optional parameters: age, gender or city'''
 
-	database = MPeople.objects.all()
+	def __init__(self, *args, **kwargs):
+		super(FilterForm, self).__init__(*args, **kwargs)
 
-	age_choices = database.values('birthday').distinct()
-	iage_choices = [('', 'None')] + [(id, id) for id in age_choices]
-	age = forms.ChoiceField(choices=iage_choices, widget=forms.Select(), required=False, localize=True)
+		database = MPeople.objects.all()
 
-	gender_choices = database.values_list('gender', flat=True).distinct()
-	igender_choices = [('', 'None')] + [(id, id) for id in gender_choices]
-	gender = forms.ChoiceField(choices=igender_choices, widget=forms.Select(), required=False)
+		age_choices = database.values('birthday').distinct()
+		iage_choices = [('', 'None')] + [(id, id) for id in age_choices]
+		self.fields['birthday'] = forms.ChoiceField(choices=iage_choices, widget=forms.Select(), required=False, localize=True)
 
-	city_choices = database.values_list('city', flat=True).distinct()
-	icity_choices = [('', 'None')] + [(id, id) for id in city_choices]
-	city = forms.ChoiceField(choices=icity_choices, widget=forms.Select(), required=False)
+		gender_choices = database.values_list('gender', flat=True).distinct()
+		igender_choices = [('', 'None')] + [(id, id) for id in gender_choices]
+		self.fields['gender'] = forms.ChoiceField(choices=igender_choices, widget=forms.Select(), required=False)
+
+		city_choices = database.values_list('city', flat=True).distinct()
+		icity_choices = [('', 'None')] + [(id, id) for id in city_choices]
+		self.fields['city'] = forms.ChoiceField(choices=icity_choices, widget=forms.Select(), required=False)
 
 	class Meta:
 		model = MPeople
 
-		fields = ('age', 'gender', 'city')
+		fields = ('birthday', 'gender', 'city')
